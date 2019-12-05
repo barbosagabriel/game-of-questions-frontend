@@ -6,12 +6,12 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    //...extractVuexModule()
+    // ...extractVuexModule()
   }
 })
 
 export const vxm = {
-  //name: createProxy(store, name)
+  // name: createProxy(store, name)
 }
 
 export default store

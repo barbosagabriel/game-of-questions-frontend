@@ -15,13 +15,14 @@ global.console = {
   ...global.console,
   error: jest.fn(),
   warn: jest.fn(),
-  info: jest.fn(),
+  info: jest.fn()
 }
 Vue.prototype.$analytics = {
-  track: (obj: any) => obj,
+  track: (obj: any) => obj
 }
 
 global.window.localStorage = {
   getItem: (key: string) => storeSim[key],
-  setItem: (key: string, value: any) => storeSim[key] = value,
+  // eslint-disable-next-line no-return-assign
+  setItem: (key: string, value: any) => storeSim[key] = value
 }

@@ -1,3 +1,3 @@
 export default async (config: any) => {
-    return config
-  }
+  return config
+}
