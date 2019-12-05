@@ -53,28 +53,28 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { DynamicDialogOptions } from "@/models/dialog/DynamicDialogOptions";
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { DynamicDialogOptions } from '@/models/dialog/DynamicDialogOptions'
 
 @Component({})
 export default class DynamicDialog extends Vue {
   @Prop()
   public options!: DynamicDialogOptions;
 
-  private get componenteDinamico(): any {
-    return () => import(`@/components/${this.options.component}`);
+  private get componenteDinamico (): any {
+    return () => import(`@/components/${this.options.component}`)
   }
 
-  private get getFontStyle(): string {
-    return this.options.fontStyleTitle;
+  private get getFontStyle (): string {
+    return this.options.fontStyleTitle
   }
 
-  public toConfirm() {
-    this.$emit("confirm");
+  public toConfirm () {
+    this.$emit('confirm')
   }
 
-  public toReject() {
-    this.$emit("reject");
+  public toReject () {
+    this.$emit('reject')
   }
 }
 </script>

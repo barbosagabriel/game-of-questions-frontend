@@ -50,24 +50,24 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { DialogOptions } from "@/models/dialog/DialogOptions";
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { DialogOptions } from '@/models/dialog/DialogOptions'
 
 @Component({})
 export default class Dialog extends Vue {
   @Prop()
   private options!: DialogOptions;
 
-  public get showDialog(): boolean {
-    return this.options.show;
+  public get showDialog (): boolean {
+    return this.options.show
   }
 
-  public toConfirm() {
-    this.$emit("confirm");
+  public toConfirm () {
+    this.$emit('confirm')
   }
 
-  public toReject() {
-    this.$emit("reject");
+  public toReject () {
+    this.$emit('reject')
   }
 }
 </script>
