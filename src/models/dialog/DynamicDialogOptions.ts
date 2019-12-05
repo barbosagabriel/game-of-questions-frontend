@@ -1,5 +1,5 @@
 
-import { ModelDynamicDialog } from './ModelDynamicDialog'
+import { DynamicDialogModel } from './DynamicDialogModel'
 
 export class DynamicDialogOptions {
   public component!: string;
@@ -7,6 +7,6 @@ export class DynamicDialogOptions {
   public fontStyleTitle: string = 'headline';
   public textConfirm!: string;
   public textReject!: string;
-  public componentModel!: ModelDynamicDialog;
+  public componentModel!: DynamicDialogModel;
   public show: boolean = true;
 }
