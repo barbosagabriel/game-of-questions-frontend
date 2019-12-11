@@ -122,6 +122,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { User, Room } from '@/models'
 import { NewRoomService } from '@/services'
 import { Container } from 'typescript-ioc'
+import { ROUTES } from '../config/routes/Routes'
 
 @Component({})
 export default class NewRoom extends Vue {
@@ -174,8 +175,7 @@ export default class NewRoom extends Vue {
   }
 
   private goToRoom (): void {
-    console.log(this.room)
-    this.$router.push({ name: 'room', params: { id: String(this.room.id) } })
+    this.$router.push({ path: `${ROUTES.Room}/${this.room.id}` })
   }
 }
 </script>

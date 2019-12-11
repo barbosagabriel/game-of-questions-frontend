@@ -6,8 +6,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: 'room/:id',
+    path: '/room/:id',
     name: 'room',
+    props: true,
     component: () => import('../views/Room.vue')
   },
   {
