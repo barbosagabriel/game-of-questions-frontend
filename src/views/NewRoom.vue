@@ -75,7 +75,7 @@
           </v-window-item>
 
           <v-window-item :value="3">
-            <div class="pa-4 text-center" v-if="user.pathAvatar">
+            <div class="pa-4 text-center" v-if="createdRoomIsCompleted">
               <v-img
                 class="mb-4"
                 contain
@@ -85,6 +85,9 @@
               <h3 class="title font-weight-light mb-2">{{ user.nickName }}</h3>
               <h3 class="title font-weight-light mb-2">
                 Welcome to Game of Questions
+              </h3>
+              <h3 class="title font-weight-light mb-2">
+                Your Pin is: {{ room.id }}
               </h3>
               <span class="caption grey--text">Have a good time!</span>
             </div>
@@ -119,17 +122,18 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { User, Room } from '@/models'
+import { UserModel, RoomModel } from '@/models'
 import { NewRoomService } from '@/services'
 import { Container } from 'typescript-ioc'
 import { ROUTES } from '../config/routes/Routes'
 
 @Component({})
 export default class NewRoom extends Vue {
-  private user = new User()
-  private room! : Room;
+  private user = new UserModel()
+  private room! : RoomModel;
   private step = 1
   private model: null | number = null
+  private createdRoomIsCompleted = false
   private newRoomService = Container.get(NewRoomService) as NewRoomService
 
   private avatars = [
@@ -164,12 +168,13 @@ export default class NewRoom extends Vue {
     const stepValue = ++this.step
     if (stepValue === 3) {
       this.generateNewRoom()
+      this.createdRoomIsCompleted = true
       this.step = stepValue
     }
   }
 
   private generateNewRoom () {
-    this.room = new Room(
+    this.room = new RoomModel(
       this.newRoomService.generateNewCodeToRoom(),
       this.user)
   }

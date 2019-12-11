@@ -1,4 +1,4 @@
-import User from './User'
-import Room from './Room'
+import UserModel from './UserModel'
+import RoomModel from './RoomModel'
 
-export { User, Room }
+export { UserModel, RoomModel }
