@@ -1,4 +1,4 @@
 import Login from './Login.vue'
-import Home from './Home.vue'
+import Room from './Room.vue'
 
-export { Home, Login }
+export { Room, Login }

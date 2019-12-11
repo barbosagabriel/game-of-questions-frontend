@@ -93,7 +93,7 @@
 
         <v-divider></v-divider>
 
-        <v-card-actions>
+        <v-card-actions v-if="step !== 3">
           <v-btn :disabled="step === 1" text @click="step--">
             Back
           </v-btn>
@@ -107,6 +107,11 @@
             Next
           </v-btn>
         </v-card-actions>
+        <v-card-actions v-if="step === 3">
+          <v-btn block color="primary" @click="goToRoom">
+            Enter the room
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
@@ -114,26 +119,22 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { User } from '@/models'
+import { User, Room } from '@/models'
+import { NewRoomService } from '@/services'
+import { Container } from 'typescript-ioc'
 
 @Component({})
 export default class NewRoom extends Vue {
   private user = new User()
+  private room! : Room;
   private step = 1
-  private model: null|number = null
+  private model: null | number = null
+  private newRoomService = Container.get(NewRoomService) as NewRoomService
 
   private avatars = [
     'avatar_1',
     'avatar_2',
-    'avatar_3',
-    'avatar_4',
-    'avatar_5',
-    'avatar_6',
-    'avatar_7',
-    'avatar_8',
-    'avatar_9',
-    'avatar_10',
-    'avatar_11'
+    'avatar_3'
   ]
 
   private get currentTitle (): string {
@@ -159,9 +160,22 @@ export default class NewRoom extends Vue {
   }
 
   public nextStep (): void {
-    if (++this.step === 3) {
-      console.log([this.user])
+    const stepValue = ++this.step
+    if (stepValue === 3) {
+      this.generateNewRoom()
+      this.step = stepValue
     }
+  }
+
+  private generateNewRoom () {
+    this.room = new Room(
+      this.newRoomService.generateNewCodeToRoom(),
+      this.user)
+  }
+
+  private goToRoom (): void {
+    console.log(this.room)
+    this.$router.push({ name: 'room', params: { id: String(this.room.id) } })
   }
 }
 </script>
