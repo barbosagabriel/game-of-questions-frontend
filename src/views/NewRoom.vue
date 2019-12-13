@@ -168,15 +168,23 @@ export default class NewRoom extends Vue {
     const stepValue = ++this.step
     if (stepValue === 3) {
       this.generateNewRoom()
+      this.addNewRomOnRepository()
       this.createdRoomIsCompleted = true
       this.step = stepValue
     }
   }
 
   private generateNewRoom () {
+    const userAdmin = true
+
     this.room = new RoomModel(
       this.newRoomService.generateNewCodeToRoom(),
-      this.user)
+      this.user,
+      userAdmin)
+  }
+
+  private addNewRomOnRepository (): void {
+    this.newRoomService.createNewRoom(this.room)
   }
 
   private goToRoom (): void {
